@@ -26,7 +26,6 @@ export default function SingleMoviePage() {
     return (
         <div>
             {state && (<>
-                <img src={state.backdrop_path} width='100' height='100' />
                 <h2>{state.title ? state.title : state.name}</h2>
                 <p>{state.overview && state.overview}</p>
                 <p>{state.vote_average}</p>
