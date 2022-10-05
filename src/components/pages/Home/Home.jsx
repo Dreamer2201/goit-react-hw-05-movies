@@ -1,9 +1,9 @@
-import MoviesList from "components/MoviesList/MoviesList";
+import Movies from "../Movies/Movies"
 
 export default function Home() {
     return (
         <>
-            <MoviesList />
+            <Movies />
         </>
     )
 }
