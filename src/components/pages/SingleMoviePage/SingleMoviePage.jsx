@@ -27,7 +27,7 @@ export default function SingleMoviePage() {
         fetchInfMovie();
     }, [id]);
 
-    const goBackPage = () => navigate("/movies");
+    const goBackPage = () => navigate(-1);
 
     return (
         <div>
