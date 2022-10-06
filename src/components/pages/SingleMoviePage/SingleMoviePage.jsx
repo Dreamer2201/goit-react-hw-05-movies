@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchOneMovie } from "components/fetch";
 import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 export default function SingleMoviePage() {
     const [state, setState] = useState(null);
@@ -9,6 +11,8 @@ export default function SingleMoviePage() {
 
     const {id } = useParams();
     console.log(id);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchInfMovie = async () => {
@@ -23,13 +27,24 @@ export default function SingleMoviePage() {
         fetchInfMovie();
     }, [id]);
 
+    const goBackPage = () => navigate("/movies");
+
     return (
         <div>
+            <button type="button" onClick={goBackPage}>Go back to movies list</button>
             {state && (<>
                 <h2>{state.title ? state.title : state.name}</h2>
                 <p>{state.overview && state.overview}</p>
                 <p>{state.vote_average}</p>
-      
+                <ul>
+                    <li>
+                        <NavLink to={'cast'}>Cast</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={'reviews'}>Reviews</NavLink>
+                    </li>
+                </ul>
+                <Outlet />
             </>)}
         </div>
     )
