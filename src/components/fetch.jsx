@@ -15,5 +15,11 @@ const fetchOneMovie = async (id) => {
     return response.data;
 
 }
-export { fetchRequest, fetchOneMovie };
+
+const fetchMovieByName = async (searchName, currentPage) => {
+    const response = await axios.get(`${BASE_URL}search/movie?api_key=${myAPIkey}&language=en-US&page=1&include_adult=false&query=${searchName}&page=${currentPage}`);
+    return response.data;
+}
+
+export { fetchRequest, fetchOneMovie, fetchMovieByName };
 
