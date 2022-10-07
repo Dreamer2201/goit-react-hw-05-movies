@@ -21,5 +21,17 @@ const fetchMovieByName = async (searchName, currentPage) => {
     return response.data;
 }
 
-export { fetchRequest, fetchOneMovie, fetchMovieByName };
+const fetchActorsMovie = async (id) => {
+    const response = await axios.get(`${BASE_URL}movie/${id}/credits?api_key=${myAPIkey}&language=en-US`);
+    return response.data;
+}
+
+const fetchReviews = async (id) => {
+    const response = await axios.get(`${BASE_URL}movie/${id}/reviews?api_key=${myAPIkey}&language=en-US&page=1`);
+    return response.data;
+}
+
+
+
+export { fetchRequest, fetchOneMovie, fetchMovieByName, fetchActorsMovie, fetchReviews };
 

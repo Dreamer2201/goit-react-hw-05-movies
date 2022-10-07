@@ -13,6 +13,7 @@ export default function SingleMoviePage() {
     console.log(id);
 
     const navigate = useNavigate();
+    const imageURL = 'https://image.tmdb.org/t/p/w500';
 
     useEffect(() => {
         const fetchInfMovie = async () => {
@@ -28,11 +29,13 @@ export default function SingleMoviePage() {
     }, [id]);
 
     const goBackPage = () => navigate(-1);
-
+    const urlPoster = state.poster_path;
+    const urlAll = `${imageURL}${urlPoster}`;
     return (
         <div>
             <button type="button" onClick={goBackPage}>Go back to movies list</button>
             {state && (<>
+                <img src={urlAll} alt={state.tagline} />
                 <h2>{state.title ? state.title : state.name}</h2>
                 <p>{state.overview && state.overview}</p>
                 <p>{state.vote_average}</p>

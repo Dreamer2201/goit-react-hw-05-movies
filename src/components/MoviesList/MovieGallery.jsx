@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import MoviesList from './MoviesList';
 import { fetchMovieByName } from 'components/fetch';
 import Search from './Search';
+import { AlertEnterQuery } from './MovieGalleryStyled';
 
 export default function MovieGallery() {
     const [searchName, setSearchName] = useState('');
@@ -10,39 +12,39 @@ export default function MovieGallery() {
     const [error, setError] = useState('');
     const [page, setPage] = useState(1);
 
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchQuery = searchParams.get('searchQuery');
+
 //     const prevPage = usePrevious(page);
 //     const prevSearchName = usePrevious(searchName);
     
     
     useEffect(() => {
-
         const fetchMovie = async () => {
-
             try {
-                const result = await fetchMovieByName(searchName, page);
+                const result = await fetchMovieByName(searchQuery, page);
                 const items = result.results;
                 console.log(items);
                 if (items.length === 0) {
                     return alert("Any images not found! Try again, please.");
                 }
-                    setMovies((prev) => [...prev, ...items]);
-                
+                    setMovies((prev) => [...prev, ...items]);             
             } catch (error) {
                 setError(error);
             } 
         };
 
-        if (!searchName) {
+        if (!searchQuery) {
             return;
         }       
-        fetchMovie(searchName);
+        fetchMovie(searchQuery);
   
             return;
-        }, [searchName, page]);
+        }, [searchQuery, page]);
 
 
     const handleSubmitSearchForm = searchName => {
-    setSearchName(searchName);
+    setSearchParams({searchQuery: searchName});
   }
 
     const loadMore = () => {
@@ -60,7 +62,7 @@ export default function MovieGallery() {
     const isMovies = Boolean(movies.length);
         return (
             <div>
-                Search Movie Gallery By Name
+                <AlertEnterQuery>Enter your query, please.</AlertEnterQuery>
                 <Search onSubmit={handleSubmitSearchForm} />
                 {error && <p>'Try later, please.'</p>}
                 {movies && <MoviesList moviesItems={movies} />}    

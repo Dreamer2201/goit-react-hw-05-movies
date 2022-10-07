@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { SearchForm, InputForm, ButtonForm } from './MovieGalleryStyled';
 
 export default function Search({ onSubmit }) {
     const [searchName, setSearchName] = useState('');
@@ -18,8 +19,8 @@ export default function Search({ onSubmit }) {
 
         return (
         <header>
-            <form onSubmit={hendleSubmitSearchForm}>                
-                <input
+            <SearchForm onSubmit={hendleSubmitSearchForm}>                
+                <InputForm
                 onChange={hendleChangeInputSearch}
                 name="searchName"
                 value={searchName}
@@ -28,9 +29,9 @@ export default function Search({ onSubmit }) {
                 autoFocus
                 placeholder="Search images and photos"
                 />
-                <button type="submit" className="button">
+                <ButtonForm type="submit" className="button">
                     <span>Search</span>
-                </button>
-            </form>
+                </ButtonForm>
+            </SearchForm>
         </header>)
     }

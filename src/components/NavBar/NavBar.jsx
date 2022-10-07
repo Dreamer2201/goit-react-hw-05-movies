@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
 import NavBarMenu from "./NavBarMenu";
+import { ConteinerNav, LogoLink } from "./NavBarStyled";
 
 export default function Navbar() {
     return (
         <nav>
-            <div>
-                <Link to="/">Logo</Link>
+            <ConteinerNav>
+                <LogoLink to="/">Logo</LogoLink>
                 <NavBarMenu />
-            </div>
+            </ConteinerNav>
         </nav>
     )
 }

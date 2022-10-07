@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
+import { TitleTrendMovies } from "./MoviesTrendStyled";
 import { fetchRequest } from "components/fetch";
 import MoviesList from "components/MoviesList/MoviesList";
 
@@ -35,7 +35,7 @@ export default function MoviesTrend() {
 
     return (
         <div>
-            <h2>Trending today</h2>
+            <TitleTrendMovies>Trending today</TitleTrendMovies>
             
             <MoviesList moviesItems={movies} />
             
