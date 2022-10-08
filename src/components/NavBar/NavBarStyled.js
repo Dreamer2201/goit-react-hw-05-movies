@@ -22,7 +22,7 @@ const ItemListNavBar = styled.li`
     margin-left: 20px;
     padding: 3px;
     text-decoration: none;
-    background-color: pink;
+    background-color: #CD853F;
     border-radius: 10px;
     
 `;
@@ -30,10 +30,14 @@ const ItemListNavBar = styled.li`
 const LogoLink = styled(Link)`
     font-size: 24px;
     text-decoration: none;
+    
 `;
 const NavList = styled(NavLink)`
     text-decoration: none;
-    
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #8B4513;
+     text-shadow: 2px 2px 2px #F4A460;
 `;
 
 export { ConteinerNav, ListNavBar, ItemListNavBar, LogoLink, NavList };

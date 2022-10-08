@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { TitleTrendMovies } from "./MoviesTrendStyled";
+import { TitleTrendMovies, BtnLoadMoreMovies } from "./MoviesTrendStyled";
 import { fetchRequest } from "components/fetch";
 import MoviesList from "components/MoviesList/MoviesList";
 
@@ -38,8 +38,8 @@ export default function MoviesTrend() {
             <TitleTrendMovies>Trending today</TitleTrendMovies>
             
             <MoviesList moviesItems={movies} />
-            
-            <button type="button" onClick={loadMore}>Load more...</button>
+            {error && <p>Something went wrong. Try later, please.</p>}
+            {MoviesList && <BtnLoadMoreMovies type="button" onClick={loadMore}>Load more...</BtnLoadMoreMovies>}
         </div>
     )
 }
