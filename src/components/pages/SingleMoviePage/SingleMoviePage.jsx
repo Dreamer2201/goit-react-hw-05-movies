@@ -29,13 +29,13 @@ export default function SingleMoviePage() {
     }, [id]);
 
     const goBackPage = () => navigate(-1);
-    const urlPoster = state.poster_path;
-    const urlAll = `${imageURL}${urlPoster}`;
+   
+
     return (
         <div>
             <button type="button" onClick={goBackPage}>Go back to movies list</button>
             {state && (<>
-                <img src={urlAll} alt={state.tagline} />
+                <img src={`${imageURL}${state.poster_path}` } alt={state.tagline} width='100'/>
                 <h2>{state.title ? state.title : state.name}</h2>
                 <p>{state.overview && state.overview}</p>
                 <p>{state.vote_average}</p>
@@ -47,6 +47,7 @@ export default function SingleMoviePage() {
                         <NavLink to={'reviews'}>Reviews</NavLink>
                     </li>
                 </ul>
+                {error && <p>Something went wrong. Try later, please.</p>}
                 <Outlet />
             </>)}
         </div>
