@@ -20,7 +20,9 @@ export default function MoviesTrend() {
             try {
                 const result = await fetchRequest(page);
                 const items = result.results;
+                
                 setMovies(prevMovies => [...prevMovies, ...items]);
+                
             } catch (error) {
                 setError(error);
             }

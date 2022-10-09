@@ -4,6 +4,7 @@ import MoviesList from './MoviesList';
 import { fetchMovieByName } from 'components/fetch';
 import Search from './Search';
 import { AlertEnterQuery } from './MovieGalleryStyled';
+import { BtnLoadMoreMovies } from './MoviesTrendStyled';
 
 export default function MovieGallery() {
     // const [searchName, setSearchName] = useState('');
@@ -66,7 +67,7 @@ export default function MovieGallery() {
                 <Search onSubmit={handleSubmitSearchForm} />
                 {error && <p>'Try later, please.'</p>}
                 {movies && <MoviesList moviesItems={movies} />}    
-                {isMovies && <button type="button" onClick={loadMore}>Load more...</button>}
+                {isMovies && <BtnLoadMoreMovies type="button" onClick={loadMore}>Load more...</BtnLoadMoreMovies>}
             </div>
         )
     }
