@@ -9,7 +9,6 @@ export default function CastList({ actorsList }) {
     console.log(elements);
     return (
         <div>
-            <p>Actors list</p>
             <ul>
                 {elements}
             </ul>

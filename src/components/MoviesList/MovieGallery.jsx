@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import MoviesList from './MoviesList';
 import { fetchMovieByName } from 'components/fetch';
@@ -6,7 +6,7 @@ import Search from './Search';
 import { AlertEnterQuery } from './MovieGalleryStyled';
 
 export default function MovieGallery() {
-    const [searchName, setSearchName] = useState('');
+    // const [searchName, setSearchName] = useState('');
     const [movies, setMovies] = useState([]);
 
     const [error, setError] = useState('');

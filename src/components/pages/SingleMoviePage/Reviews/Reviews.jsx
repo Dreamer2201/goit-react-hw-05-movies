@@ -4,10 +4,10 @@ import { fetchReviews } from "components/fetch";
 import RewiewsList from "./ReviewsList";
 
 export default function Reviews() {
-     const [state, setState] = useState(null);
+     const [state, setState] = useState([]);
     const [error, setError] = useState('');
 
-     const {id } = useParams();
+    const {id } = useParams();
     console.log(id);
 
     useEffect(() => {
@@ -23,10 +23,14 @@ export default function Reviews() {
         fetchInfReviews();
     }, [id]);
 
+    const isState = Boolean(state.length);
+    console.log(isState);
+
+    
     return (
         <div>
-            <p>Reviews list</p>
-            {state && <RewiewsList reviewsList={state} />}
+            <h2>Reviews list</h2>
+            {isState ? <RewiewsList reviewsList={state} /> : <p>Any reviews. Your review can be first.</p> }
             {error && <p>Something went wrong. Try later, please.</p>}
         </div>
     )

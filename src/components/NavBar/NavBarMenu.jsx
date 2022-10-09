@@ -1,5 +1,5 @@
 import { itemsMenu } from "components/itemsMenu";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { ListNavBar, ItemListNavBar, NavList } from "./NavBarStyled";
 
 export default function NavBarMenu() {

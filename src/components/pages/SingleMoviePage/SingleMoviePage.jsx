@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { fetchOneMovie } from "components/fetch";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
@@ -14,6 +14,15 @@ export default function SingleMoviePage() {
 
     const {id } = useParams();
     console.log(id);
+
+    const location = useLocation();
+    console.log(location);
+
+    const isCastPage = location.pathname.includes('cast');
+    const castLink = isCastPage ? `/movies/${id}` : `/movies/${id}/cast`;
+
+    const isReviews = location.pathname.includes('reviews');
+    const reviewsLink = isReviews ? `/movies/${id}` : `/movies/${id}/reviews`;
 
     const navigate = useNavigate();
     const imageURL = 'https://image.tmdb.org/t/p/w500';
@@ -48,20 +57,20 @@ export default function SingleMoviePage() {
                         <h2>{state.title ? state.title : state.name}</h2>
                         <span>({state.release_date.substr(0, 4)})</span>
                         <h3>User score:</h3>
-                        <p>{state.vote_average * 10} %</p>
+                        <p>{Math.round(state.vote_average * 10)} %</p>
                         <h3>Overview</h3>
                         <p>{state.overview}</p>
                         <h3>Genres</h3>
                         <p>{genresList}</p>
                     </div>
                 </WrapperDetailsInfMovie>
-                <p>Additional information</p>
+                <h2>Additional information</h2>
                 <ul>
                     <li>
-                        <NavLink to={'cast'}>Cast</NavLink>
+                        <NavLink to={castLink}>Cast</NavLink>
                     </li>
                     <li>
-                        <NavLink to={'reviews'}>Reviews</NavLink>
+                        <NavLink to={reviewsLink}>Reviews</NavLink>
                     </li>
                 </ul>
                 {error && <p>Something went wrong. Try later, please.</p>}

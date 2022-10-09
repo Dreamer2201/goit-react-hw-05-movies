@@ -8,7 +8,6 @@ export default function RewiewsList({ reviewsList }) {
     console.log(elements);
     return (
         <div>
-            <p>Actors list</p>
             <ul>
                 {elements}
             </ul>

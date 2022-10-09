@@ -26,7 +26,7 @@ export default function Cast() {
    
     return (
         <div>
-            <p>Actors list</p>
+            <h2>Actors list</h2>
             {state && <CastList actorsList={state} />}
             {error && <p>Something went wrong. Try later, please.</p>}
         </div>
