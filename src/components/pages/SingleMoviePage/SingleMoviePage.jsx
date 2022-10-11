@@ -4,23 +4,21 @@ import { fetchOneMovie } from "components/fetch";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { ThreeDots } from 'react-loader-spinner';
 import { WrapperDetailsInfMovie } from "./SingleMovieStyled";
 import { BtnGoBack, ContainerInfMovie, YearReleseMovie, TitleHeadDetails, TitleWrapper, GenresWrapper, GenreName  } from "./SingleMovieStyled";
 
 export default function SingleMoviePage() {
     const [state, setState] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [genresList, setGenresList] = useState([]);
 
     const { id } = useParams();
-    console.log(id);
-
     const location = useLocation();
-    console.log(location);
-
+   
     const isCastPage = location.pathname.includes('cast');
     const castLink = isCastPage ? `/movies/${id}` : `/movies/${id}/cast`;
-
     const isReviews = location.pathname.includes('reviews');
     const reviewsLink = isReviews ? `/movies/${id}` : `/movies/${id}/reviews`;
 
@@ -29,36 +27,40 @@ export default function SingleMoviePage() {
 
     useEffect(() => {
         const fetchInfMovie = async () => {
+            setLoading(true);
             try {
                 const movieDetails = await fetchOneMovie(id);
-                console.log(movieDetails.genres);
-                const genres = movieDetails.genres.map(({ name }) => (<GenreName>{name}</GenreName>));
-                
+                const genres = movieDetails.genres.map(({ name, id }) => (<GenreName key={id}>{name}</GenreName>));
                 setState(movieDetails);
                 setGenresList(genres);
-                
-                
-
             } catch (error) {
+                console.log(error);
                 setError(error);
+            } finally {
+                setLoading(false);
             }
         }
-        fetchInfMovie();
-        
+        fetchInfMovie();  
     }, [id]);
 
     const goBackHomePage = () => navigate('/');
     const goBackMoviesPage = () => navigate('/movies');
-    
-//     const list = genresList.map(({ props }) => {
-//         return (props.name);
-// });
-//     console.log(list);
 
     return (
         <div>
             <BtnGoBack type="button" onClick={goBackHomePage}>Go back HOME</BtnGoBack>
             <BtnGoBack type="button" onClick={goBackMoviesPage}>Go back to MOVIES</BtnGoBack>
+             {loading &&    <ThreeDots 
+                                height="80" 
+                                width="80" 
+                                radius="9"
+                                color="#4fa94d" 
+                                ariaLabel="three-dots-loading"
+                                wrapperStyle={{}}
+                                wrapperClassName=""
+                                visible={true}
+                            />}
+            {error && <p>Something went wrong. Try later, please.</p>}
             {state && (<>
                 <WrapperDetailsInfMovie>
                     <img src={`${imageURL}${state.poster_path}`} alt={state.tagline} width='300' height='370' />
@@ -84,7 +86,6 @@ export default function SingleMoviePage() {
                         <NavLink to={reviewsLink}>Reviews</NavLink>
                     </li>
                 </ul>
-                {error && <p>Something went wrong. Try later, please.</p>}
                 <Outlet />
             </>)}
         </div>
