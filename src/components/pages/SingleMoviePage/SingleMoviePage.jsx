@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation, NavLink, Outlet } from "react-router-dom";
 import { fetchOneMovie } from "components/fetch";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { Outlet } from "react-router-dom";
 import { ThreeDots } from 'react-loader-spinner';
 import { WrapperDetailsInfMovie } from "./SingleMovieStyled";
 import { BtnGoBack, ContainerInfMovie, YearReleseMovie, TitleHeadDetails, TitleWrapper, GenresWrapper, GenreName  } from "./SingleMovieStyled";
@@ -34,7 +32,6 @@ export default function SingleMoviePage() {
                 setState(movieDetails);
                 setGenresList(genres);
             } catch (error) {
-                console.log(error);
                 setError(error);
             } finally {
                 setLoading(false);

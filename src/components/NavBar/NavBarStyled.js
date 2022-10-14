@@ -22,7 +22,7 @@ const ItemListNavBar = styled.li`
     margin-left: 20px;
     padding: 3px;
     text-decoration: none;
-    background-color: #CD853F;
+    
     border-radius: 10px;
     
 `;
@@ -38,6 +38,14 @@ const NavList = styled(NavLink)`
     font-weight: bold;
     color: #8B4513;
      text-shadow: 2px 2px 2px #F4A460;
+
+  &.active {
+    padding: 5px;
+    color: blue;
+    background-color: #CD853F;
+    border-radius: 10px;
+  }
+
 `;
 
 export { ConteinerNav, ListNavBar, ItemListNavBar, LogoLink, NavList };

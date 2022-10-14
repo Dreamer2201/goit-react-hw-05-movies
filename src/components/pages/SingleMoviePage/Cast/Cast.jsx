@@ -10,14 +10,12 @@ export default function Cast() {
     const [error, setError] = useState('');
 
     const {id } = useParams();
-    console.log(id);
 
     useEffect(() => {
         const fetchInfActors = async () => {
             setLoading(true);
             try {
                 const movieActors = await fetchActorsMovie(id);
-                console.log(movieActors.cast);
                 setState(movieActors.cast);
             } catch(error) {
                 setError(error);
@@ -28,7 +26,6 @@ export default function Cast() {
         fetchInfActors();
     }, [id]);
 
-   
     return (
         <div>
             <h2>Actors list</h2>

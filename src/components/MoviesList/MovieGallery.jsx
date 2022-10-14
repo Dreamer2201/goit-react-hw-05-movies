@@ -1,15 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import MoviesList from './MoviesList';
+import { ThreeDots } from 'react-loader-spinner';
+import usePrevious from 'hooks/usePrevious';
 import { fetchMovieByName } from 'components/fetch';
 import Search from './Search';
+import MoviesList from './MoviesList';
 import { AlertEnterQuery } from './MovieGalleryStyled';
 import { BtnLoadMoreMovies } from './MoviesTrendStyled';
-import { ThreeDots } from 'react-loader-spinner';
 
 export default function MovieGallery() {
-    // const [searchName, setSearchName] = useState('');
-    const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('listmovies')) ?? []);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [page, setPage] = useState(1);
@@ -21,12 +21,15 @@ export default function MovieGallery() {
     const prevSearchName = usePrevious(searchQuery);
 
     useEffect(() => {
+    window.localStorage.setItem('listmovies', JSON.stringify(movies));
+    }, [movies]);
+    
+    useEffect(() => {
         const fetchMovie = async () => {
             setLoading(true);
             try {
                 const result = await fetchMovieByName(searchQuery, page);
                 const items = result.results;
-                console.log(items);
                 if (items.length === 0) {
                     return alert("Any images not found! Try again, please.");
                 } if (page === 1) {
@@ -59,21 +62,12 @@ export default function MovieGallery() {
         setPage(1);
     }
 
-
     const handleSubmitSearchForm = searchName => {
         setSearchParams({ searchQuery: searchName });
     };
 
     const loadMore = () => {
         setPage((prev) => prev + 1);
-    };
-
-    function usePrevious(value) {
-        const ref = useRef();
-        useEffect(() => {
-            ref.current = value;
-        });
-        return ref.current;
     };
 
     const isMovies = Boolean(movies.length);

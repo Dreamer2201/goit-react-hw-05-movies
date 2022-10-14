@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { SearchForm, InputForm, ButtonForm } from './MovieGalleryStyled';
 
 export default function Search({ onSubmit }) {
@@ -16,8 +17,8 @@ export default function Search({ onSubmit }) {
         onSubmit(searchName);
          setSearchName('');
     }
-
-        return (
+    
+    return (
         <header>
             <SearchForm onSubmit={hendleSubmitSearchForm}>                
                 <InputForm
@@ -34,4 +35,8 @@ export default function Search({ onSubmit }) {
                 </ButtonForm>
             </SearchForm>
         </header>)
-    }
+}
+    
+Search.propTypes = {
+    onSubmit:  PropTypes.func.isRequired,
+}
