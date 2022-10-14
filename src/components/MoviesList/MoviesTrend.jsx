@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { TitleTrendMovies, BtnLoadMoreMovies } from "./MoviesTrendStyled";
 import { fetchRequest } from "components/fetch";
 import MoviesList from "components/MoviesList/MoviesList";
@@ -10,14 +10,7 @@ export default function MoviesTrend() {
     const [error, setError] = useState('');
     const [page, setPage] = useState(1);
 
-    const isRender = useRef(true);
-
     useEffect(() => {
-        if (isRender.current) {
-            isRender.current = false;
-            return;
-        }
-
         const fetchImages = async () => {
             setLoading(true);
             try {
@@ -55,7 +48,7 @@ export default function MoviesTrend() {
             }
         };
         fetchImages(page);
-    }, [page, isRender]);
+    }, [page]);
 
     const loadMore = () => {
         setPage(prev => prev + 1);
